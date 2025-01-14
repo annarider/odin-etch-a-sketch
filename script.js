@@ -14,8 +14,9 @@ for (let i = 0; i < 16; i++) {
 // Create hover effect
 const squares = document.querySelectorAll(".square");
 squares.forEach((square) => {
+  let randomHexColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
   // and for each one we add a 'click' listener
   square.addEventListener("mouseenter", (e) => {
-  e.target.style.background = 'blue';
+  e.target.style.background = randomHexColor;
   });
 });
