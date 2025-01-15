@@ -23,6 +23,22 @@ function generateRandomColor(opacity = 1) {
   return rgb;
 }
 
+// Claude tells me to improve this function by only
+// registering 1 event listener instead of 
+// thousands like so:
+// function createHover() {
+//   const container = document.querySelector("#container");
+  
+//   container.addEventListener("mouseenter", (e) => {
+//     if (!e.target.classList.contains("square")) return;
+    
+//     const opacity = e.target.style.background ? 
+//       Math.min(parseFloat(e.target.style.background.slice(-4)) + 0.1, 1.0) : 0.1;
+    
+//     e.target.style.background = generateRandomColor(opacity);
+//   }, true);
+// }
+
 function createHover() {
   const opacityIncrement = 0.1;
   const squares = document.querySelectorAll(".square");
@@ -42,10 +58,8 @@ function createHover() {
   });
 }
 
-function deleteGrid(){
-  const container = document.querySelector("#container");
-  container.replaceChildren();
-  return container;
+function deleteGrid() {
+  document.querySelector("#container").replaceChildren();
 }
 
 function sketch(number) {
