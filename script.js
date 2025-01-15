@@ -14,19 +14,30 @@ function drawGrid(number = 16) {
   }
 }
 
-function generateRandomColor() {
-  let randomHexColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-  return randomHexColor;
+function generateRandomColor(opacity = 1) {
+  const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+  const r = randomBetween(0, 255);
+  const g = randomBetween(0, 255);
+  const b = randomBetween(0, 255);
+  const rgb = `rgb(${r}, ${g}, ${b}, ${opacity})`; // Collect all to a css color string
+  return rgb;
 }
 
 function createHover() {
-  // Create hover effect
+  const opacityIncrement = 0.1;
   const squares = document.querySelectorAll(".square");
   squares.forEach((square) => {
-    const color = generateRandomColor();
-    // and for each one we add a 'click' listener
+    // each square tracks its own color & opacity
+    let opacity = 0.1; 
+    let color = generateRandomColor(opacity);
+    // for each one we add a 'click' listener
     square.addEventListener("mouseenter", (e) => {
-    e.target.style.background = color;
+      e.target.style.background = color;
+      if (opacity < 1.0) {
+        opacity += opacityIncrement;
+      }
+      color = color.slice(0, -4) + opacity.toFixed(1) + ')';
+      console.log(color);
     });
   });
 }
