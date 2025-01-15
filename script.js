@@ -12,19 +12,24 @@ function drawGrid(number = 16) {
     }
     container.append(row);
   }
-};
+}
+
+function generateRandomColor() {
+  let randomHexColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+  return randomHexColor;
+}
 
 function createHover() {
   // Create hover effect
   const squares = document.querySelectorAll(".square");
   squares.forEach((square) => {
-    let randomHexColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+    const color = generateRandomColor();
     // and for each one we add a 'click' listener
     square.addEventListener("mouseenter", (e) => {
-    e.target.style.background = randomHexColor;
+    e.target.style.background = color;
     });
   });
-};
+}
 
 function deleteGrid(){
   const container = document.querySelector("#container");
@@ -47,7 +52,7 @@ function redraw() {
     deleteGrid();
     sketch(number);
 })
-};
+}
 
 sketch();
 redraw();
